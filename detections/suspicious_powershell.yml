@@ -1,0 +1,21 @@
+title: Suspicious PowerShell Encoded Command
+id: 8bca3e65-39f5-47cf-9166-0d80c4ab9e52
+status: experimental
+description: Detects PowerShell processes using encoded commands
+author: SOC Practice Lab
+date: 2026-11-14
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        CommandLine|contains:
+            - '-EncodedCommand'
+            - '-enc '
+    condition: selection
+falsepositives:
+    - Legitimate administrative scripts
+level: medium
+tags:
+    - attack.execution
+    - attack.t1059.001
